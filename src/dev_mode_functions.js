@@ -117,22 +117,28 @@ async function printPoolAmount() {
   alert("Money Pool balance: " + pool_amount + " WEI = " + pool_amount_in_eth + " ETH");
 }
 
+// async function sendrewards() {
+//   alert("Sending rewards ...");
+// 
+//   const nonce = await this.state.web3.eth.getTransactionCount(
+//     this.state.account,
+//     "pending"
+//   );
+//   const txETH = {
+//     nonce: nonce,
+//     gasLimit: 210000,
+//     to: this.state.contract_address,
+//     gasPrice: this.state.web3.utils.toHex(8 * (1e9).toString()),
+//     from: this.state.account,
+//     data: this.state.contract.methods.sendrewards().encodeABI(),
+//   };
+//   await this.state.web3.eth.sendTransaction(txETH);
+// }
+
 async function sendrewards() {
   alert("Sending rewards ...");
 
-  const nonce = await this.state.web3.eth.getTransactionCount(
-    this.state.account,
-    "pending"
-  );
-  const txETH = {
-    nonce: nonce,
-    gasLimit: 210000,
-    to: this.state.contract_address,
-    gasPrice: this.state.web3.utils.toHex(8 * (1e9).toString()),
-    from: this.state.account,
-    data: this.state.contract.methods.sendrewards().encodeABI(),
-  };
-  await this.state.web3.eth.sendTransaction(txETH);
+  await this.state.contract.methods.sendrewards().send({from: this.state.account})
 }
 
 module.exports.loadButtonsETHUpdate = loadButtonsETHUpdate;

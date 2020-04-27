@@ -19,7 +19,9 @@ contract Meme is usingProvable{
   mapping(string => investment[]) investmentsMap;
   //ADDRESS TO INVESTMENTS
   mapping (address => investment[]) public investorToInvestments;
+  mapping(string => uint) InvestByMemes;
   uint public moneypool = 0;
+  uint public Lambda = 0.5 * 1e18;
 
 
   constructor () payable public {
@@ -111,6 +113,14 @@ contract Meme is usingProvable{
     inv.investorAddr = msg.sender;
     inv.amount = amount;
     inv.link = link;
+    bool first = false;
+
+    for( uint i = 0 ; i < investorToInvestments[msg.sender].length ; i++ ){
+      if (keccak256(abi.encodePacked(link)) == keccak256(abi.encodePacked(investorToInvestments[msg.sender][i].link))) {
+        first = true;
+      }
+    }
+    if(first == false) InvestByMemes[link]++;
     investorToInvestments[msg.sender].push(inv);
     investmentsMap[link].push(inv);
     moneypool += amount;
@@ -151,9 +161,63 @@ contract Meme is usingProvable{
     
   }
 
+  //Reward part
+  function GetBestMeme() public  returns(string memory){
 
-  function sendrewards() payable public{
-    //A COMPLETER
+    string memory best = linksAndOwnersMOTD[0];
+    uint max = InvestByMemes[best];
+    uint creatori = 0;
+    for(uint i = 2;i < linksAndOwnersMOTD.length;i = i + 2){
+
+      if(InvestByMemes[linksAndOwnersMOTD[i]] > max){
+
+        best = linksAndOwnersMOTD[i];
+        max = InvestByMemes[linksAndOwnersMOTD[i]];
+        creatori = i;
+
+    }
+      delete InvestByMemes[linksAndOwnersMOTD[i]];
+    }
+    string memory _addr = linksAndOwnersMOTD[creatori + 1];
+    address payable topay = address(uint160(parseAddr(_addr)));
+    topay.transfer(moneypool * 5 / 100); //5% Owner
+    return best;
+  }
+  function sendrewards()  public{
+    string memory bestmeme = GetBestMeme();
+    uint lasti = investmentsMap[bestmeme].length - 1;
+    uint[] memory scores = new uint[]( investmentsMap[bestmeme].length);
+    uint[] memory norm = new uint[]( investmentsMap[bestmeme].length);
+    uint minscore = 0;
+    uint maxscore = 0;
+    uint sumnorme = 0;
+    uint sum = 0;
+    address payable RD = 0x510DD0463F258cd64c3C63F186DaBF9F3cEC68E0;
+    RD.transfer(moneypool * 5 / 100); //5% R&D
+    moneypool = moneypool * 90 / 100; // 90% Gamblers
+    for (uint i = 0; i < investmentsMap[bestmeme].length; i++){
+
+      scores[i] = (investmentsMap[bestmeme][i].amount * (lasti - i + 1) ) - (i * Lambda );
+
+      if(minscore == 0) minscore = scores[i];
+
+      if(scores[i] < minscore) minscore = scores[i];
+      if(scores[i] > maxscore) maxscore = scores[i];
+    }
+    for (uint i = 0; i < investmentsMap[bestmeme].length; i++){
+
+      norm[i] = (scores[i]*100000 - minscore) / (maxscore - minscore + 1);
+      sumnorme += norm[i];
+    }
+
+    for (uint i = 0; i < investmentsMap[bestmeme].length; i++){
+
+       address payable winner = address(uint160(investmentsMap[bestmeme][i].investorAddr));
+       winner.transfer(moneypool * norm[i] / sumnorme);
+       sum += moneypool * norm[i] / sumnorme;
+    }
+    moneypool -= sum;
+    clearOldInvestments();
     
   }
 
