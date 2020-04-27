@@ -1,0 +1,62 @@
+{
+  "name": "meme-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-brands-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "assert": "^2.0.0",
+    "axios": "^0.19.2",
+    "bip39": "^3.0.2",
+    "blockies-identicon": "^0.1.0",
+    "bridge": "^1.0.0-alpha2",
+    "docker": "^1.0.0",
+    "ethereum-bridge": "file:src/ethereum-bridge",
+    "ethereum-tx-decoder": "^3.0.0",
+    "ethereumjs-tx": "^2.1.2",
+    "ethereumjs-wallet": "^0.6.3",
+    "font-awesome": "^4.7.0",
+    "geth": "^0.4.0",
+    "ipfs-api": "^26.1.2",
+    "jquery": "^3.4.1",
+    "keythereum-pure-js": "^1.1.7",
+    "mysql": "^2.18.1",
+    "node-gyp": "^6.1.0",
+    "node-sass": "^4.13.1",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-infinite-scroll-component": "^5.0.4",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "rebuild": "^0.1.2",
+    "testrpc": "0.0.1",
+    "truffle": "^5.1.20",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3": "^1.2.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
