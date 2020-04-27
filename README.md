@@ -1,61 +1,110 @@
-## Installation 
+# MMM
 
-I- Ganache :
-1) Install Ganache from https://www.trufflesuite.com/ganache.
-2) Open Ganache with the Quick Start option and change the PORT NUMBER to 8545 in Settings -> Server (see image 1-Ganache Port Number).
-3) Change the Mnenomic to : "vacuum market liberty mention source kiss behind chimney network glare forward visit" in Settings -> ACCOUNTS & KEYS. This will allow you to have the same addresses as in our tests in order to be consistent with the address ethereum brdge will use (see image 2-Ganache Mnemonic).
-
-II- Metamask :
-1)Install Metamask from https://metamask.io/.
-2)Add a custom RPC with as new URL of RPC "HTTP://127.0.0.1:8545" and select this network as the current Metamask network(see image 3-Custom RPC Metamask).
+## Getting started  
 
 
-III- Conda :
-1) Download Miniconda installer for Windows from https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html.
-2) Execute the .exe and follow the instructions.
+### Preliminary requirements 
 
-##Deployment
+#### Ganache
+1. Install [Ganache](https://www.trufflesuite.com/ganache).
+2. Open Ganache with the Quick Start option and change the PORT NUMBER to 8545 in Settings -> Server.
+3. Change the Mnenomic to : **"vacuum market liberty mention source kiss behind chimney network glare forward visit"** in Settings -> ACCOUNTS & KEYS. This will allow you to have the same addresses as in our tests in order to be consistent with the address ethereum brdge will use.
 
-1) Extract MMM_source.tar.
-2) Open the anaconda prompt that you can find on the Windows start menu after the installation of Conda and go to the extracted MMM_source folder (ex: cd ../desktop/MMM_source).
-3) Run the command "setup.sh" on the anaconda prompt (If a there is a problem with executing .sh files under WINDOWS, download Git from https://git-scm.com/) and wait for it to finish.
-4) Open the anaconda prompt and run the command "conda activate MMM".
-5) On the same anaconda prompt, go to ../MMM_source/src then run "truffle migrate --reset".
-6) Open a command prompt and go to ../MMM_source/src/ethereum-bridge then run the command "ethereum-bridge -H localhost:8545 -a 1 --dev" and leave it open (Wait until you have "Ctrcl + C to exit" writed on the command prompt).
-7) Open another command prompt and go to ../MMM_source/src then run "truffle migrate --reset" another time.
-8) On the same prompt, run the command "npm start".
-9) Wait for a localhost:3000 web page to open.
 
-## Functionalities
+#### Metamask  
+1. Install [Metamask](https://metamask.io/).
+2. Add a custom RPC with as new URL of RPC "HTTP://127.0.0.1:8545" and select this network as the current Metamask network.
+3. Add the account address ```0x340d10f3a238eaf78566017db25C5237F6664893``` (it will be the bridge account).
+4. Add other accounts.
 
-Those buttons are development features to facilitate testing. They appear only when using the bridge account having the address "0x340d10f3a238eaf78566017db25C5237F6664893". 
+#### Miniconda :
+Install Miniconda  [here](https://docs.conda.io/en/latest/miniconda.html). \
+Miniconda will be used to build an independant environment for the project.
 
-#[Send ETH]: Send 5 ETH to Smart Contract for Provable's fee to retrieve the Memes Of The Day from the database.
-#[Update best memes]: Get the most liked memes to display in the Memes Of The Day tab(It takes about 10-20 sec to update).
-#[Get Pool Money]: Displays on the web page console the amount of Wei invested by users on the memes of the day.
-#[Send Rewards]: Send the rewards to the investors and the creator of the winning meme.
 
-N.B : Refresh the page when you change the metamask current account.
+### Installation 
+1. Go to the ```MMM_source``` folder
+2. Execute the command 
+```
+./setup.sh
+```
+to install all the application dependencies.
 
-## Usage
 
-The actual implementation doesn't apply the 24 hours phase system to facilitate the testing and demonstration.
+## Application deployment 
 
-Different tabs of the menu :
+### Activate the MMM environment
+To activate the MMM environment that contains the necessary dependencies for the next steps, execute the command :
+```
+conda activate MMM
+```
 
-# Home 
+
+### Blockchain initialization 
+Start or restart Ganache to initialize the blockchain. To restart it go to Setting -> Restart. \
+10 accounts will be displayed with a balance of 100 ETH each.
+
+
+### Lauching bridge 
+Make sure that you are using the MMM environment, activate it if not. \
+Go to the ```ethereum-bridge``` folder in ```src``` and execute the command :
+```
+./ethereum-bridge -H localhost:8545 -a 1 --dev
+```
+
+
+### Smart contract deployment 
+Open a new terminal, and make sure that you are using the MMM environment, activate it if not. \
+Go to the ```src``` folder and execute the command :
+```
+truffle migrate --reset
+```
+This will deploy the smart contract. You will see on Ganache that a user has spent a few ether when deploying the smart contract.
+
+
+### Start application 
+1. To run the application, execute the command : 
+```
+npm start
+```
+2. Wait until the page is loaded. If an error appears, reset your metamask accounts and refresh the page.
+
+
+
+
+## Usage 
+The actual implementation doesn't apply the 24 hours phase system to facilitate the testing and demonstration. 
+
+
+
+### Bridge account functionalities
+Use the bridge account of address ```0x340d10f3a238eaf78566017db25C5237F6664893``` to get a few tools to ease the demonstration.
+Under this account, you will have the possibility to : 
+1. Send Ether 5 by 5 to the smart contract, this step is mandatory to retrieve the best memes
+2. Update the best memes. This takes around 10 to 20 seconds.
+3. Get the pool money (the amount to be split and distributed)
+4. Send rewards (distribute the amount in the pool money)
+
+
+
+### Menu 
+The menu has different tabs:
+
+##### Home 
 The main page where memes are displayed and where users can like memes and upload new memes.
-See "Home.png" for a quick guide.
 
-# Memes Of The Day
-The best memes from the previous day that users can invest on.(Empty until you don't trigger the [Update best memes] button)
+##### Memes Of The Day
+The best memes that have been uploaded the previous day that users can gamble on. (Empty until you don't trigger the [Update best memes] button with the bridge account)
 
-# My Memes
+##### My Memes
 Allows you to display the memes posted by the current account selected on Metamask.
 
-# My investments 
-Allows you to display the investments posted by the current account selected on Metamask.
+##### My investments 
+Allows you to display the bets posted by the current account selected on Metamask.
 
+### Upload meme
+At the top right of homepage, you will find a button dedicated to upload memes.
 
-
+### Gamble 
+Go to the My Investments page, click on Invest and pick the sum you want to bet.
 
