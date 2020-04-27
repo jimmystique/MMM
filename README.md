@@ -8,7 +8,7 @@
 #### Ganache
 1. Install [Ganache](https://www.trufflesuite.com/ganache).
 2. Open Ganache with the Quick Start option and change the PORT NUMBER to 8545 in Settings -> Server.
-3. Change the Mnenomic to : **"vacuum market liberty mention source kiss behind chimney network glare forward visit"** in Settings -> ACCOUNTS & KEYS. This will allow you to have the same addresses as in our tests in order to be consistent with the address ethereum brdge will use.
+3. Change the Mnenomic to : **"vacuum market liberty mention source kiss behind chimney network glare forward visit"** in Settings -> ACCOUNTS & KEYS. This will allow you to have the same addresses as in our tests in order to be consistent with the address ethereum brdge will use. The first address should be ```0x510DD0463F258cd64c3C63F186DaBF9F3cEC68E0```.
 
 
 #### Metamask  
@@ -44,16 +44,17 @@ Start or restart Ganache to initialize the blockchain. To restart it go to Setti
 10 accounts will be displayed with a balance of 100 ETH each.
 
 
-### Launch the bridge 
+### Launch bridge 
 Make sure that you are using the MMM environment, activate it if not. \
 Go to the ```ethereum-bridge``` folder in ```src``` and execute the command :
 ```
 ./ethereum-bridge -H localhost:8545 -a 1 --dev
 ```
+Wait until the bridge launch is complete before proceeding to the next step (it should from 1 to 2 minutes).
 
 
 ### Smart contract deployment 
-Open a new terminal, and make sure that you are using the MMM environment, activate it if not. \
+Open a new terminal, make sure that you are using the MMM environment, activate it if not.  \
 Go to the ```src``` folder and execute the command :
 ```
 truffle migrate --reset
@@ -62,7 +63,7 @@ This will deploy the smart contract. You will see on Ganache that a user has spe
 
 
 ### Start application 
-1. To run the application, execute the command : 
+1. To run the application, go to the ```src``` folder and execute the command : 
 ```
 npm start
 ```
