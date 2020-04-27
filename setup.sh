@@ -7,5 +7,5 @@ git clone https://github.com/oraclize/ethereum-bridge.git src/ethereum-bridge
 conda install -c conda-forge nodejs
 npm install
 npm rebuild node-sass
-cd src; truffle migrate --reset
+cd src; truffle compile 
 
