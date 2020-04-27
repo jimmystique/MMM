@@ -44,7 +44,7 @@ Start or restart Ganache to initialize the blockchain. To restart it go to Setti
 10 accounts will be displayed with a balance of 100 ETH each.
 
 
-### Lauching bridge 
+### Launch the bridge 
 Make sure that you are using the MMM environment, activate it if not. \
 Go to the ```ethereum-bridge``` folder in ```src``` and execute the command :
 ```
