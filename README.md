@@ -23,8 +23,7 @@ Miniconda will be used to build an independant environment for the project.
 
 
 ### Installation 
-1. Go to the ```MMM_source``` folder
-2. Execute the command 
+Execute the command 
 ```
 ./setup.sh
 ```
