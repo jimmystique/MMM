@@ -219,7 +219,7 @@ class App extends Component {
         <div id="load_data" className="container">
           <InfiniteScroll
             dataLength={this.state.htmlMyInvestmentsCode.length}
-            next={this.loadMyInvestments}
+            next={this.loadMyInvestments.bind(this)}
             hasMore={this.state.hasMore3}
             loader={<h4>Loading...</h4>}
             endMessage={<div></div>}
