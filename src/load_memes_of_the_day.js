@@ -7,7 +7,7 @@ async function loadMemesOfTheDay() {
   var icons = [];
   var icon = blockies.create({ seed: "0" });
   if (motd.length === 0){
-    this.setState({ htmlMemesOfTheDayCode: <h2> There are no memes to invest on :( </h2> });
+    this.setState({ htmlMemesOfTheDayCode: <h2> There are no memes to gamble on :( </h2> });
     return;
   }
   for (var i = 0; i < motd.length / 2; i++) {
@@ -27,7 +27,7 @@ async function loadMemesOfTheDay() {
           value={link}
           onClick={this.Popup}
         >
-          Invest
+          Gamble
         </button>
         <div>
           <img className="identicon" src={icon.toDataURL()} alt="identicon"/>

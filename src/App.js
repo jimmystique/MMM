@@ -174,7 +174,7 @@ class App extends Component {
           <div className="Imagediv">
             <img src="" id="invested-image" alt="investedimage"></img>
           </div>
-          <h1>Investment On</h1>
+          <h1>Gamble on</h1>
           <hr />
           <span id="close" onClick={this.closePopup}>
             <h2 id="closeb">x</h2>
@@ -183,7 +183,7 @@ class App extends Component {
             <h2>ETH</h2>
             <input
               type="number"
-              placeholder="ETH Amount of the investment"
+              placeholder="Amount to bet in Ether "
               className="input-field"
               step="1e-5"
               min="1e-5"
@@ -199,7 +199,7 @@ class App extends Component {
               onClick={this.investAction.bind(this)}
             >
               {" "}
-              Invest{" "}
+              Gamble{" "}
             </button>
           </div>
         </div>
@@ -214,7 +214,7 @@ class App extends Component {
     return (
       <>
         <div className="App-subtitle">
-          <h2>My Investments</h2>
+          <h2>My Bets</h2>
         </div>
         <div id="load_data" className="container">
           <InfiniteScroll
@@ -262,8 +262,8 @@ class App extends Component {
                     </a>
                   </li>
                   <li>
-                    <a className="menu-item" href="/myinvestments">
-                      <FontAwesomeIcon icon={faEthereum} /> My Investments
+                    <a className="menu-item" href="/mybets">
+                      <FontAwesomeIcon icon={faEthereum} /> My Bets
                     </a>
                   </li>
                 </ul>
@@ -284,7 +284,7 @@ class App extends Component {
         <Route exact path="/memesoftheday">
           {this.render_memesoftheday()}
         </Route>
-        <Route exact path="/myinvestments">
+        <Route exact path="/mybets">
           {this.render_myinvestments()}
         </Route>
         <Route exact path="/mymemes">

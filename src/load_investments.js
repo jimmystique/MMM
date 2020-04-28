@@ -7,7 +7,7 @@ async function loadMyInvestments() {
     .call();
   const items = [];
   if (invts.length === 0) {
-    this.setState({ htmlMyInvestmentsCode: <h2>You have no Investments</h2> });
+    this.setState({ htmlMyInvestmentsCode: <h2>You haven't bet yet !</h2> });
     this.setState({ hasMore3: false });
   } else {
     var icons = [];
